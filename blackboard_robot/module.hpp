@@ -21,18 +21,14 @@ public:
 	int getNumOfOutputs() const;
 	std::vector<std::string>* getInputsTitle() const;
 	std::vector<std::string>* getOutputsTitle() const;
-	std::vector<int>* getInputsVarType() const;
-	std::vector<int>* getOutputsVarType() const;
 
-	int getInput(int index) const;
-	void setOutput(int index, int output);
+	float getInput(int index) const;
+	void setOutput(int index, float signal);
 	std::vector<int> *inputsIndex;
 	std::vector<int> *outputsIndex;
 protected:
 	std::vector<std::string> *inputsTitle;
 	std::vector<std::string> *outputsTitle;
-	std::vector<int> *inputsVarType;
-	std::vector<int> *outputsVarType;
 	int numOfInputs;
 	int numOfOutputs;
 

@@ -34,39 +34,27 @@ inline blackboard* robot::getMemory() const{
 inline void robot::addModule(module* module){
 	//moduleをrobotに登録
 	modules->push_back(module);
-	//さすがに関係ないよな…
-	//module = modules->back();
 	module->setParentModule(this);
 	int index;
 	//moduleの入力を，blackboardの出力と接続
 	for(int i = 0; i < module->getNumOfInputs(); i++){
-		index = memory->addOutput(module->getInputsTitle()->at(i), 
-			module->getInputsVarType()->at(i));
+		index = memory->addOutput(module->getInputsTitle()->at(i));
 		module->addInputsIndex(index);	//index on memory->outputs
-		//ここまでOK
-		std::cout << "inputs(" << i << ") " << *(int *)(memory->outputs->at(module->inputsIndex->at(i))) << std::endl;
 	}
 	//moduleの出力を，blackboardの入力と接続
 	for(int i = 0; i < module->getNumOfOutputs(); i++){
-		index = memory->addInput(module->getOutputsTitle()->at(i),
-			module->getOutputsVarType()->at(i));
+		index = memory->addInput(module->getOutputsTitle()->at(i));
 		module->addOutputsIndex(index);	//index on memory->inputs
-		//ここまでOK
-		std::cout << "outputs(" << i << ") " <<*(int *)(memory->inputs->at(module->outputsIndex->at(i))) << std::endl;
 	}
 }
 
 inline void robot::Test(){
 	for(int i = 0; i < modules->size(); i++){
-		//ここでおかしい
 		for(int j = 0; j < modules->at(i)->inputsIndex->size(); j++){
-			std::cout << "inputs:(" << i << ", " << j << ") :" << *(int *)(memory->outputs->at(modules->at(i)->inputsIndex->at(j))) << std::endl;
-			//std::cout << j << " - inputsIndex: " << modules->at(i)->inputsIndex->at(j) << std::endl;
-			//std::cout << "pointer to inputs:(" << i << ", " << j << ") :" << (memory->outputs->at(modules->at(i)->inputsIndex->at(j))) << std::endl;
+			std::cout << "inputs:(" << i << ", " << j << ") :" << memory->getOutputs(modules->at(i)->inputsIndex->at(j)) << std::endl;
 		}
 		for(int j = 0; j < modules->at(i)->outputsIndex->size(); j++){
-			std::cout << "outputs:(" << i << ", " << j << ") :" << *(int *)(memory->inputs->at(modules->at(i)->outputsIndex->at(j))) << std::endl;
-			//std::cout << j << " - outputsIndex: " << modules->at(i)->outputsIndex->at(j) << std::endl;
+			std::cout << "outputs:(" << i << ", " << j << ") :" << memory->getInputs(modules->at(i)->outputsIndex->at(j)) << std::endl;
 		}
 	}
 }
