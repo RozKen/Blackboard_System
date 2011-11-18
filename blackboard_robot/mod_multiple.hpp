@@ -19,19 +19,19 @@ inline mod_multiple::mod_multiple(){
 inline void mod_multiple::Run(){
 	///////////////////ここで間違ったメモリアクセスが発生中//////////
 	//Acquire Data
-	int a = getInput(0);
-	std::cout << "inputsIndex->at(0): " << inputsIndex->at(0) << std::endl;
-	std::cout << *(int *)(memory->outputs->at(inputsIndex->at(0))) << std::endl;
-	std::cout << memory->intValues->at(inputsIndex->at(0)) << std::endl;
-	int b = getInput(1);
-	std::cout << "inputsIndex->at(1): " << inputsIndex->at(1) << std::endl;
-	std::cout << memory->intValues->at(inputsIndex->at(1)) << std::endl;
+	float a = getInput(0);
+	//std::cout << "inputsIndex->at(0): " << inputsIndex->at(0) << std::endl;
+	//std::cout << *(int *)(memory->outputs->at(inputsIndex->at(0))) << std::endl;
+	//std::cout << memory->intValues->at(inputsIndex->at(0)) << std::endl;
+	float b = getInput(1);
+	//std::cout << "inputsIndex->at(1): " << inputsIndex->at(1) << std::endl;
+	//std::cout << memory->intValues->at(inputsIndex->at(1)) << std::endl;
 	//Process
-	int c = a * b;
+	float c = a * b;
 	std::cout << "a: " << a << ", b: " << b << ", c: " << c << std::endl;
 	//Deliver Data
 	setOutput(0, c);
-	std::cout << "outputsIndex->at(0): " << outputsIndex->at(0) << std::endl;
+	//std::cout << "outputsIndex->at(0): " << outputsIndex->at(0) << std::endl;
 }
 
 #endif	//mod_multiple_HPP_

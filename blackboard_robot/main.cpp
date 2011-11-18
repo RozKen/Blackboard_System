@@ -31,22 +31,17 @@ void main(){
 
 	for(int i = 0; i < 100; i++){
 		robo->Run();
-		std::cout << "inputs: ";
-		for(int j = 0; j < memory->inputs->size(); j++){
-			std::cout << (int)*(int*)(memory->inputs->at(j)) << "\t";
+		std::cout << "memory-inputs: ";
+		for(int j = 0; j < memory->getNumOfInputs(); j++){
+			std::cout << memory->getInputs(j) << "\t";
 		}
 		std::cout << std::endl;
 
-		std::cout << "outputs: ";
-		for(int j = 0; j < memory->outputs->size(); j++){
-			std::cout << (int)*(int*)(memory->outputs->at(j)) << "\t";
+		std::cout << "memory-outputs: ";
+		for(int j = 0; j < memory->getNumOfOutputs(); j++){
+			std::cout << memory->getOutputs(j) << "\t";
 		}
 		std::cout << std::endl;
-		
-		std::cout << "intValues: ";
-		for(int j = 0; j < memory->intValues->size(); j++){
-			std::cout << memory->intValues->at(i) << "\t";
-		}
 		std::cout << std::endl;
 		std::cout << "============================" << std::endl;
 

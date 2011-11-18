@@ -22,13 +22,17 @@ public:
 	void setInputs(int index, float signal);
 	float getOutputs(int index) const;
 	void setOutputs(int index, float signal);
+	int getNumOfInputs() const;
+	int getNumOfOutputs() const;
 
 protected:
 	std::vector<float>* inputs;
 	std::vector<float>* outputs;
+	int numOfInputs;
+	int numOfOutputs;
 };
 
-inline blackboard::blackboard(){
+inline blackboard::blackboard(): numOfInputs(0), numOfOutputs(0){
 	inputs = new std::vector<float>();
 	outputs = new std::vector<float>();
 }
@@ -41,12 +45,14 @@ inline blackboard::~blackboard(){
 inline int blackboard::addInput(std::string title){
 	inputs->push_back(NO_SIGNAL);
 	int index = inputs->size() - 1;
+	numOfInputs++;
 	return index;
 }
 
 inline int blackboard::addOutput(std::string title){
 	outputs->push_back(NO_SIGNAL);
 	int index = outputs->size() - 1;
+	numOfOutputs++;
 	return index;
 }
 
@@ -72,6 +78,13 @@ inline float blackboard::getOutputs(int index) const{
 }
 inline void blackboard::setOutputs(int index, float signal){
 	outputs->at(index) = signal;
+}
+
+inline int blackboard::getNumOfInputs() const{
+	return numOfInputs;
+}
+inline int blackboard::getNumOfOutputs() const{
+	return numOfOutputs;
 }
 
 #endif	//blackboard_HPP_
