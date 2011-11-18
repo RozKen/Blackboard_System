@@ -8,8 +8,6 @@
 
 class blackboard{
 public:
-	//int add(int* pointer);
-	//int add(float* pointer);
 	blackboard();
 	~blackboard();
 	int addInput(std::string title);
@@ -57,11 +55,12 @@ inline int blackboard::addOutput(std::string title){
 }
 
 inline void blackboard::Run(){
-	std::cout << "inputs" << std::endl;
+	std::cout << "blackboard-inputs:" << std::endl;
 	for(int i = 0; i < inputs->size(); i++){
 		std::cout << inputs->at(i) << "\t";
 	}
-	std::cout << "outputs" << std::endl;
+	std::cout << std::endl;
+	std::cout << "blackboard-outputs:" << std::endl;
 	for(int i = 0; i < outputs->size(); i++){
 		std::cout << outputs->at(i) << "\t";
 	}

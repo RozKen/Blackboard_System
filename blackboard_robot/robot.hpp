@@ -40,21 +40,16 @@ inline void robot::addModule(module* module){
 	for(int i = 0; i < module->getNumOfInputs(); i++){
 		index = memory->addOutput(module->getInputsTitle()->at(i));
 		module->addInputsIndex(index);	//index on memory->outputs
-		//‚±‚±‚Ü‚ÅOK
-		std::cout << "inputs(" << i << ") " << memory->getOutputs(index) << std::endl;
 	}
 	//module‚Ìo—Í‚ðCblackboard‚Ì“ü—Í‚ÆÚ‘±
 	for(int i = 0; i < module->getNumOfOutputs(); i++){
 		index = memory->addInput(module->getOutputsTitle()->at(i));
 		module->addOutputsIndex(index);	//index on memory->inputs
-		//‚±‚±‚Ü‚ÅOK
-		std::cout << "outputs(" << i << ") " << memory->getInputs(index) << std::endl;
 	}
 }
 
 inline void robot::Test(){
 	for(int i = 0; i < modules->size(); i++){
-		//‚±‚±‚Å‚¨‚©‚µ‚¢
 		for(int j = 0; j < modules->at(i)->inputsIndex->size(); j++){
 			std::cout << "inputs:(" << i << ", " << j << ") :" << memory->getOutputs(modules->at(i)->inputsIndex->at(j)) << std::endl;
 		}
