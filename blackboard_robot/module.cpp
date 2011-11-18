@@ -7,8 +7,6 @@ module::module(): numOfInputs(0), numOfOutputs(0){
 	outputsIndex = new std::vector<int>();
 	inputsTitle = new std::vector<std::string>();
 	outputsTitle = new std::vector<std::string>();
-	inputsVarType = new std::vector<int>();
-	outputsVarType = new std::vector<int>();
 }
 
 module::~module(){
@@ -16,8 +14,6 @@ module::~module(){
 	delete(outputsIndex);
 	delete(inputsTitle);
 	delete(outputsTitle);
-	delete(inputsVarType);
-	delete(outputsVarType);
 }
 
 void module::setParentModule(robot* parent){
@@ -27,19 +23,19 @@ void module::setParentModule(robot* parent){
 
 void module::addInput(std::string title, int varType){
 	inputsTitle->push_back(title);
-	inputsVarType->push_back(varType);
 	numOfInputs = inputsTitle->size();
 }
 void module::addOutput(std::string title, int varType){
 	outputsTitle->push_back(title);
-	outputsVarType->push_back(varType);
 	numOfOutputs = outputsTitle->size();
 }
 
 void module::addInputsIndex(int index){
+	//robotにおいて，blackboardへ登録されたときに実行される．
 	inputsIndex->push_back(index);
 }
 void module::addOutputsIndex(int index){
+	//robotにおいて，blackboardへ登録されたときに実行される．
 	outputsIndex->push_back(index);
 }
 
@@ -56,24 +52,17 @@ std::vector<std::string>* module::getInputsTitle() const{
 std::vector<std::string>* module::getOutputsTitle() const{
 	return outputsTitle;
 }
-std::vector<int>* module::getInputsVarType() const{
-	return inputsVarType;
-}
-std::vector<int>* module::getOutputsVarType() const{
-	return outputsVarType;
-}
 
-int module::getInput(int index) const{
-	int result;
-	//return *(int *)(memory->outputs->at(this->inputsIndex->at(index)));
-	result = *(int *)(memory->outputs->at(index));
+float module::getInput(int index) const{
+	//moduleへの入力はmemoryの出力から入手
+	int result = memory->getOutputs(index);
 	std::cout << result << std::endl;
 	return result;
 }
-void module::setOutput(int index, int output){
-	int result;
-	//*(int *)(memory->inputs->at(this->outputsIndex->at(index))) = output;
-	*(int *)(memory->inputs->at(index)) = output;
-	result = *(int *)(memory->inputs->at(index));
+
+void module::setOutput(int index, float signal){
+	//moduleからの出力はmemoryの入力へ送信
+	memory->setInputs(index, signal);
+	int result = memory->getInputs(index);
 	std::cout << result << std::endl;
 }
